@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Contact — Meighan Lindstrom Art</title>
+<meta name="description" content="Contact Meighan Lindstrom about prints, originals, commissions and lettering.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="css/style.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23fff'/%3E%3Ctext x='16' y='24' font-family='Georgia,serif' font-size='21' text-anchor='middle' fill='%230d0c0b'%3EM%3C/text%3E%3C/svg%3E">
+</head>
+<body>
+
+<header class="bar">
+  <div class="bar__l"><a class="mark" href="index.html">Meighan Lindstrom Art</a></div>
+  <div class="bar__c"></div>
+  <nav class="bar__r" aria-label="Primary">
+    <a class="navlink" href="index.html">Home</a>
+    <a class="navlink" href="gallery.html">Work</a>
+    <a class="navlink" href="about.html">About</a>
+    <a class="navlink" href="contact.html" aria-current="page">Contact</a>
+  </nav>
+  <button class="burger" aria-label="Menu" aria-expanded="false">Menu</button>
+</header>
+
+<nav class="menu" aria-label="Menu">
+  <a href="index.html">Home</a>
+  <a href="gallery.html">Work</a>
+  <a href="about.html">About</a>
+  <a href="contact.html" aria-current="page">Contact</a>
+  <div class="menu__sep"></div>
+  <div class="menu__meta">
+    <a href="mailto:hello@meighanlindstrom.com">hello@meighanlindstrom.com</a>
+  </div>
+</nav>
+
+<main class="page">
+
+  <div class="block" style="padding-top:clamp(40px,9vh,90px)">
+
+    <h1 class="lede">
+      Prints, originals, commissions, or something you have not quite
+      <em>worked out</em> yet.
+    </h1>
+
+    <div class="cols">
+
+      <div>
+        <form class="form" name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+          <input type="hidden" name="form-name" value="contact">
+          <p style="display:none"><label>Leave blank <input name="bot-field"></label></p>
+
+          <div class="field">
+            <label class="micro" for="name">Name</label>
+            <input id="name" name="name" type="text" required>
+          </div>
+
+          <div class="field">
+            <label class="micro" for="email">Email</label>
+            <input id="email" name="email" type="email" required>
+          </div>
+
+          <div class="field">
+            <label class="micro" for="subject">Subject</label>
+            <span class="select-wrap">
+            <select id="subject" name="subject">
+              <option>A print</option>
+              <option>An original</option>
+              <option>A commission</option>
+              <option>Hand lettering</option>
+              <option>Licensing</option>
+              <option>Saying hello</option>
+            </select>
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 6 8 10.5 12.5 6"/></svg>
+            </span>
+          </div>
+
+          <div class="field">
+            <label class="micro" for="message">Message</label>
+            <textarea id="message" name="message" required></textarea>
+          </div>
+
+          <button class="submit" type="submit">Send</button>
+
+          <p class="note">
+            No mailing list, no follow-up sequence. Your note goes straight to
+            Meighan, and everything gets read and answered within a few days.
+          </p>
+        </form>
+      </div>
+
+      <div>
+        <div class="row">
+          <div class="row__k micro">Prints</div>
+          <div class="row__v">Any piece in the work, printed on good paper</div>
+        </div>
+        <div class="row">
+          <div class="row__k micro">Originals</div>
+          <div class="row__v">Some are available — ask about a specific one</div>
+        </div>
+        <div class="row">
+          <div class="row__k micro">Commissions</div>
+          <div class="row__v">A home, a pet, a person, a day worth keeping</div>
+        </div>
+        <div class="row">
+          <div class="row__k micro">Lettering</div>
+          <div class="row__v">Weddings, menus, signage, cards, small runs</div>
+        </div>
+        <div class="row">
+          <div class="row__k micro">Licensing</div>
+          <div class="row__v">Editorial, packaging, textiles</div>
+        </div>
+        <div class="row">
+          <div class="row__k micro">Direct</div>
+          <div class="row__v"><a href="mailto:hello@meighanlindstrom.com">hello@meighanlindstrom.com</a></div>
+        </div>
+
+        <figure class="plate" style="margin-top:48px">
+          <img src="images/thumb/flowers-vase-yellow.jpg" alt="I'll Be Your Flowers — drawing by Meighan Lindstrom" width="714" height="1000" loading="lazy" decoding="async">
+          <figcaption>I'll Be Your Flowers</figcaption>
+        </figure>
+      </div>
+
+    </div>
+  </div>
+
+</main>
+
+<footer class="foot">
+  <span>Meighan Lindstrom Art</span>
+  <a href="mailto:hello@meighanlindstrom.com">Email</a>
+  <a href="https://instagram.com/" target="_blank" rel="noopener">Instagram</a>
+  <span class="foot__end micro">© <span id="yr">2026</span></span>
+</footer>
+
+<script src="js/works.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>

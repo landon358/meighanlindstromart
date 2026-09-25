@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Work — Meighan Lindstrom Art</title>
+<meta name="description" content="Drawings and hand lettering by Meighan Lindstrom — flowers, words, New York, and the everyday.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="css/style.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23fff'/%3E%3Ctext x='16' y='24' font-family='Georgia,serif' font-size='21' text-anchor='middle' fill='%230d0c0b'%3EM%3C/text%3E%3C/svg%3E">
+</head>
+<body>
+
+<header class="bar">
+  <div class="bar__l"><a class="mark" href="index.html">Meighan Lindstrom Art</a></div>
+  <nav class="bar__c" aria-label="Filter">
+    <div class="filters">
+      <button class="filter" data-filter="all"      aria-pressed="true">All</button>
+      <button class="filter" data-filter="flowers"  aria-pressed="false">Flowers</button>
+      <button class="filter" data-filter="words"    aria-pressed="false">Words</button>
+      <button class="filter" data-filter="newyork"  aria-pressed="false">New York</button>
+      <button class="filter" data-filter="everyday" aria-pressed="false">Everyday</button>
+    </div>
+  </nav>
+  <nav class="bar__r" aria-label="Primary">
+    <a class="navlink" href="index.html">Home</a>
+    <a class="navlink" href="gallery.html" aria-current="page">Work</a>
+    <a class="navlink" href="about.html">About</a>
+    <a class="navlink" href="contact.html">Contact</a>
+  </nav>
+  <button class="burger" aria-label="Menu" aria-expanded="false">Menu</button>
+</header>
+
+<nav class="menu" aria-label="Menu">
+  <a href="index.html">Home</a>
+  <a href="gallery.html" aria-current="page">Work</a>
+  <a href="about.html">About</a>
+  <a href="contact.html">Contact</a>
+  <div class="menu__sep"></div>
+  <div class="menu__meta">
+    <a href="mailto:hello@meighanlindstrom.com">hello@meighanlindstrom.com</a>
+  </div>
+</nav>
+
+<main class="page">
+
+  <h1 class="sr-only">Work — prints by Meighan Lindstrom</h1>
+
+  <div class="filterbar">
+    <div class="filters">
+      <button class="filter" data-filter="all"      aria-pressed="true">All</button>
+      <button class="filter" data-filter="flowers"  aria-pressed="false">Flowers</button>
+      <button class="filter" data-filter="words"    aria-pressed="false">Words</button>
+      <button class="filter" data-filter="newyork"  aria-pressed="false">New York</button>
+      <button class="filter" data-filter="everyday" aria-pressed="false">Everyday</button>
+    </div>
+  </div>
+
+  <div class="grid" data-grid></div>
+
+</main>
+
+<div class="viewer" aria-hidden="true" role="dialog" aria-label="Print">
+  <div class="viewer__bar">
+    <span class="viewer__title" data-v-title></span>
+    <button class="viewer__close" data-v-close>Close</button>
+  </div>
+  <div class="viewer__stage">
+    <div class="vlayer"><figure class="vlayer__fig"></figure></div>
+    <div class="vlayer"><figure class="vlayer__fig"></figure></div>
+  </div>
+  <div class="viewer__nav">
+    <span class="viewer__count" data-v-count></span>
+    <button class="arrow arrow--prev" data-v-prev aria-label="Previous">
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M13 8H3M7 4 3 8l4 4"/></svg>
+    </button>
+    <button class="arrow arrow--next" data-v-next aria-label="Next">
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+    </button>
+  </div>
+</div>
+
+<footer class="foot">
+  <span>Meighan Lindstrom Art</span>
+  <a href="mailto:hello@meighanlindstrom.com">Email</a>
+  <a href="https://instagram.com/" target="_blank" rel="noopener">Instagram</a>
+  <span class="foot__end micro">© <span id="yr">2026</span></span>
+</footer>
+
+<script src="js/works.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
