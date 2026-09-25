@@ -4,14 +4,16 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Meighan Lindstrom Art</title>
-<meta name="description" content="Small drawings for ordinary days. Prints, originals and commissions by Meighan Lindstrom.">
+<meta name="description" content="Prints by Meighan Lindstrom — drawings and hand lettering about flowers, cities, and ordinary days.">
 <meta property="og:title" content="Meighan Lindstrom Art">
-<meta property="og:description" content="Small drawings for ordinary days.">
+<meta property="og:description" content="Prints by Meighan Lindstrom.">
 <meta property="og:image" content="images/thumb/my-garden.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="css/style.css">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23fff'/%3E%3Ctext x='16' y='24' font-family='Georgia,serif' font-size='21' text-anchor='middle' fill='%230d0c0b'%3EM%3C/text%3E%3C/svg%3E">
+<link rel="icon" href="images/icon-32.png" sizes="32x32">
+<link rel="icon" href="images/icon-512.png" sizes="512x512">
+<link rel="apple-touch-icon" href="images/icon-180.png">
 </head>
 <body>
 
@@ -19,8 +21,7 @@
   <div class="bar__l"><a class="mark" href="index.html">Meighan Lindstrom Art</a></div>
   <div class="bar__c"></div>
   <nav class="bar__r" aria-label="Primary">
-    <a class="navlink" href="index.html" aria-current="page">Home</a>
-    <a class="navlink" href="gallery.html">Work</a>
+    <a class="navlink" href="index.html" aria-current="page">Prints</a>
     <a class="navlink" href="about.html">About</a>
     <a class="navlink" href="contact.html">Contact</a>
   </nav>
@@ -28,40 +29,38 @@
 </header>
 
 <nav class="menu" aria-label="Menu">
-  <a href="index.html" aria-current="page">Home</a>
-  <a href="gallery.html">Work</a>
+  <a href="index.html" aria-current="page">Prints</a>
   <a href="about.html">About</a>
   <a href="contact.html">Contact</a>
 </nav>
 
-<main class="page home">
+<main class="page">
 
-  <div class="rules" aria-hidden="true">
-    <span class="rule rule--v1"></span>
-    <span class="rule rule--h1"></span>
-  </div>
+  <h1 class="sr-only">Prints by Meighan Lindstrom</h1>
 
-  <div class="trail" data-deck aria-hidden="true"></div>
-
-  <div class="stage">
-    <div>
-      <h1 class="stage__name">Meighan<br><em>Lindstrom</em></h1>
-      <p class="stage__say">Small drawings for ordinary days.</p>
-      <div class="stage__go">
-        <a class="tlink" href="gallery.html">
-          all prints
-          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
-        </a>
-      </div>
-    </div>
-  </div>
-
-  <div class="stage__foot micro">
-    <a href="gallery.html">Selected work</a>
-    <span class="stage__clock" data-clock aria-hidden="true"></span>
-  </div>
+  <div class="grid" data-grid></div>
 
 </main>
+
+<div class="viewer" aria-hidden="true" role="dialog" aria-label="Print">
+  <div class="viewer__bar">
+    <span class="viewer__title" data-v-title></span>
+    <button class="viewer__close" data-v-close>Close</button>
+  </div>
+  <div class="viewer__stage">
+    <div class="vlayer"><figure class="vlayer__fig"></figure></div>
+    <div class="vlayer"><figure class="vlayer__fig"></figure></div>
+  </div>
+  <div class="viewer__nav">
+    <span class="viewer__count" data-v-count></span>
+    <button class="arrow arrow--prev" data-v-prev aria-label="Previous">
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M13 8H3M7 4 3 8l4 4"/></svg>
+    </button>
+    <button class="arrow arrow--next" data-v-next aria-label="Next">
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+    </button>
+  </div>
+</div>
 
 <footer class="foot">
   <span>Meighan Lindstrom Art</span>

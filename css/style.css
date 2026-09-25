@@ -83,7 +83,13 @@ button {
   gap: 20px;
   height: var(--bar);
   padding: 0 var(--pad);
+  /* nothing behind it until the page moves, so the deck runs under it */
+  background: transparent;
+  transition: background-color .4s var(--ease), box-shadow .4s var(--ease);
+}
+body.scrolled .bar {
   background: var(--paper);
+  box-shadow: 0 1px 0 0 var(--rule);
 }
 .bar__l { justify-self: start; }
 .bar__c { justify-self: center; }
@@ -98,9 +104,6 @@ button {
   white-space: nowrap;
 }
 
-.filters { display: flex; gap: 22px; }
-
-.filter,
 .navlink {
   /* 44px hit area inside the 58px bar — the text does not move */
   display: inline-flex;
@@ -113,13 +116,10 @@ button {
   white-space: nowrap;
   transition: color .35s var(--ease);
 }
-.filter:hover,
 .navlink:hover { color: var(--ink); }
-.filter[aria-pressed="true"],
 .navlink[aria-current="page"] { color: var(--ink); }
 
 .page { padding-top: calc(var(--bar) + 4px); }
-.page.home { padding-top: var(--bar); }
 
 /* ============================================================
    MENU (small screens)
@@ -145,6 +145,7 @@ button {
   flex-direction: column;
 }
 body.menu-open .menu { display: flex; }
+body.menu-open .bar { background: var(--paper); }
 body.menu-open { overflow: hidden; }
 
 .menu a {
@@ -155,123 +156,6 @@ body.menu-open { overflow: hidden; }
 .menu a[aria-current="page"] { font-style: italic; }
 .menu__sep { height: 1px; background: var(--rule); margin: 26px 0 20px; }
 .menu__meta a { font-size: var(--fs); color: var(--mute); }
-
-/* ============================================================
-   HOME — a crosshair, a name, and a spiral wake of prints
-   ============================================================ */
-
-.home {
-  position: relative;
-  min-height: calc(100dvh - var(--bar));
-  overflow: hidden;
-  padding: 0;
-}
-
-/* structure lines — the page is divided, not decorated */
-.rules { position: absolute; inset: 0; pointer-events: none; z-index: 0; }
-.rule { position: absolute; background: var(--rule); }
-
-/* a single cross through the middle of the page, both lines running
-   edge to edge */
-.rule--v1 { left: 50%; top: 0;  bottom: 0; width: 1px; }
-.rule--h1 { top: 50%;  left: 0; right: 0;  height: 1px; }
-
-/* the deck — sets of prints land as one continuous, square-on chain.
-   No transitions here on purpose: cards appear and go in a single frame. */
-.trail { position: absolute; inset: 0; pointer-events: none; z-index: 1; }
-
-.card {
-  position: absolute;
-  width: var(--w, 150px);
-  aspect-ratio: 1;
-  background: var(--paper);
-  /* a hairline edge, because most of these prints are on white paper
-     and a stack of them would otherwise read as one blank shape */
-  box-shadow: 0 0 0 1px var(--rule);
-  transform: translate(-50%, -50%);
-}
-.card img { width: 100%; height: 100%; object-fit: contain; }
-
-.stage {
-  position: relative;
-  z-index: 2;
-  min-height: calc(100dvh - var(--bar));
-  display: grid;
-  place-items: center;
-  padding: 0 var(--pad);
-  text-align: center;
-  pointer-events: none;
-}
-.stage > * { pointer-events: auto; }
-
-.stage__name {
-  margin: 0;
-  font-size: clamp(2.8rem, 9vw, 7.5rem);
-  font-weight: 400;
-  /* Garamond carries a long g descender and tall d/t ascenders; below
-     about 1.06 the two lines collide. No glow is needed once they clear. */
-  line-height: 1.08;
-  letter-spacing: -0.02em;
-}
-.stage__name em { font-style: italic; }
-
-.stage__say {
-  margin: 22px 0 0;
-  font-size: clamp(1rem, 1.7vw, 1.2rem);
-  color: var(--mute);
-}
-.stage__go { margin-top: 34px; }
-
-.stage__foot {
-  position: absolute;
-  z-index: 2;
-  bottom: 0; left: 0; right: 0;
-  display: flex;
-  justify-content: space-between;
-  gap: 16px;
-  padding: 0 var(--pad) 26px;
-  pointer-events: none;
-}
-.stage__foot > * {
-  background: var(--paper);
-  /* padding grows the hit area; the negative margin keeps the baseline */
-  padding: 10px 0;
-  margin: -10px 0;
-}
-.stage__foot a {
-  pointer-events: auto;
-  transition: color .35s var(--ease);
-}
-.stage__foot a:hover { color: var(--ink); }
-
-/* lining figures, so the milliseconds do not shuffle the text width */
-.stage__clock {
-  font-variant-numeric: tabular-nums;
-  font-feature-settings: "tnum";
-}
-
-.tlink {
-  display: inline-flex;
-  align-items: baseline;
-  min-height: 44px;
-  gap: 14px;
-  font-family: var(--serif);
-  font-style: italic;
-  font-size: clamp(1.5rem, 2.4vw, 2.1rem);
-  line-height: 1;
-  letter-spacing: 0;
-  text-transform: lowercase;
-  padding-bottom: 4px;
-  border-bottom: 1px solid transparent;
-  background: transparent;
-  transition: border-color .35s var(--ease);
-}
-.tlink:hover { border-color: var(--rule); }
-.tlink svg { width: 12px; height: 12px; align-self: center; }
-
-@media (max-width: 640px) {
-  .stage__foot { font-size: 10px; }
-}
 
 /* ============================================================
    GRID — three wide, tight, no captions until hover
@@ -370,6 +254,36 @@ body.menu-open { overflow: hidden; }
 .row__v a:hover { border-color: var(--ink); }
 
 .plate { margin: 0; }
+
+/* about: the photograph sits in the side column, with room beneath it
+   for the two reference images once they are cleared to publish */
+.portrait { margin: 0; }
+.portrait img { width: 100%; height: auto; }
+.portrait figcaption { margin-top: 12px; font-style: italic; color: var(--mute); }
+
+.pair {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin-top: 14px;
+}
+.pair figure { margin: 0; }
+.pair img { width: 100%; height: auto; }
+.pair figcaption { margin-top: 10px; font-size: var(--fs-sm); color: var(--mute); line-height: 1.45; }
+
+/* the second reference is a text artifact rather than an image, so it
+   is given the same footprint as the plate beside it */
+.ref-quote {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+.ref-quote blockquote {
+  margin: 0;
+  font-style: italic;
+  font-size: 1.05rem;
+  line-height: 1.35;
+}
 .plate figcaption { margin-top: 14px; font-style: italic; color: var(--mute); }
 
 .head { padding: 0 var(--pad); margin-bottom: clamp(30px, 6vh, 54px); }
@@ -541,7 +455,6 @@ body.menu-open { overflow: hidden; }
   gap: 10px 26px;
   align-items: baseline;
   padding: 30px var(--pad) 36px;
-  border-top: 1px solid var(--rule);
 }
 .foot a { color: var(--mute); transition: color .35s var(--ease); }
 .foot a:hover { color: var(--ink); }
@@ -556,28 +469,13 @@ body.menu-open { overflow: hidden; }
   .bar { grid-template-columns: 1fr auto; }
   .bar__c, .bar__r { display: none; }
   .burger { display: inline-flex; justify-self: end; }
-
-  .filterbar {
-    position: sticky;
-    top: var(--bar);
-    z-index: 30;
-    background: var(--paper);
-    padding: 4px var(--pad) 16px;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
-  }
-  .filterbar::-webkit-scrollbar { display: none; }
-  .filterbar .filters { width: max-content; }
 }
-@media (min-width: 860px) { .filterbar { display: none; } }
 
 @media (prefers-reduced-motion: reduce) {
-  /* colour and opacity feedback survives; travel does not.
-     JS also sets the viewer's slide distance to 0. */
+  /* colour and opacity feedback survives; the viewer's slide does not.
+     JS also sets the slide distance to 0. */
   html { scroll-behavior: auto; }
   .item__cap { opacity: 1; transform: none; transition: none; }
   .arrow:hover { transform: none; }
   .vlayer { transition-property: opacity !important; }
-  .trail { display: none; }
 }
