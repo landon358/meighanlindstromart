@@ -8,25 +8,19 @@ Static. No build step, no dependencies.
 python3 serve.py          # http://localhost:4321
 ```
 
-`serve.py` exists because `python -m http.server` sends no `Cache-Control`,
-so browsers silently reuse stale JS and CSS — which looks exactly like a
-change not working. This one refuses caching outright.
-
 ## Structure
 
 ```
 index.html      Home    — crosshair stage + a chain of prints that walks the page
-gallery.html    Work    — all 32, three wide, filters
-about.html      About   — placeholder copy, see below
-contact.html    Contact
-css/style.css
-js/works.js     catalogue — slug, title, series, aspect ratio
-js/main.js      menu, grid, filters, viewer, deck, clock
-images/full/    max 1800px — the viewer
-images/thumb/   max 900px — the grids and the deck
+  gallery.html    Work    — all 32, three wide, filters
+  about.html      About
+  contact.html    Contact
+  css/style.css
+  js/works.js     catalogue — slug, title, series, aspect ratio
+  js/main.js      menu, grid, filters, viewer
+  images/full/    max 1800px — the viewer
+  images/thumb/   max 900px — the grids
 ```
-
-All artwork © Meighan Lindstrom.
 
 ## Design
 
@@ -111,20 +105,17 @@ The three prints on the home page are set by one attribute in `index.html`:
 the first takes the large left column, the second drops furthest, the third
 drops a little.
 
-## Before this goes live — needs Meighan's real details
+## Still to supply
 
-Nothing about her is invented; the copy was written from the artwork. These
-placeholders are the exception:
-
-- **`hello@meighanlindstrom.com`** — in all four pages (bar menu, footer,
-  About, Contact). Search and replace.
-- **Instagram** — `https://instagram.com/` with no handle, in the bar menu
-  and footer of all four pages.
-- **About page** — currently **lorem ipsum placeholder**, marked with an HTML
-  comment in `about.html`. The earlier draft copy and the practice/materials
-  detail rows were removed. This folder is not under version control, so they
-  are saved in `../about-copy-draft.md` rather than being recoverable.
-- **Titles** — from each drawing's own hand lettering where it had any,
+- **No email address or social links anywhere.** The earlier build carried an
+  invented `hello@…` address and an empty Instagram link; both were removed
+  rather than left as dead labels. Add real ones to the footer and the mobile
+  menu when they exist — until then the contact form is the only route, and
+  it works.
+- **About page** is lorem ipsum placeholder, marked with an HTML comment in
+  `about.html`. The earlier draft copy and the practice/materials rows are in
+  `about-copy-draft.md`.
+- **Titles** come from each drawing's own hand lettering where it had any,
   otherwise descriptive.
 - **No dates.** No year, exhibition or client is claimed anywhere.
 
