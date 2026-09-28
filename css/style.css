@@ -27,7 +27,13 @@
 
 *, *::before, *::after { box-sizing: border-box; }
 
-html { -webkit-text-size-adjust: 100%; }
+html {
+  -webkit-text-size-adjust: 100%;
+  /* This guard lives on html, not body. On body it computes overflow-y to
+     auto, which makes body a scroll container and silently kills
+     position: sticky on the bar. */
+  overflow-x: hidden;
+}
 
 body {
   margin: 0;
@@ -39,7 +45,6 @@ body {
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  overflow-x: hidden;
 }
 
 img { display: block; max-width: 100%; }
@@ -73,9 +78,31 @@ button {
    BAR
    ============================================================ */
 
+/* The logo sits at the top of the document and scrolls away; the bar
+   sticks to the top once it reaches it. A fixed two-row header would have
+   held ~130px of every viewport hostage, which on a phone is most of a
+   print. */
+.brand { position: relative; z-index: 49; }
+
+/* The logo is the site title, so it is a link and sized to read as one.
+   The PNG has a transparent ground — the scan's paper was 251 and dipped to
+   242, which showed as a grey rectangle against the page's #ffffff. */
+.brand__link {
+  display: block;
+  width: fit-content;
+  margin: 0 auto;
+  padding-top: clamp(20px, 4vh, 40px);
+}
+
+.logo {
+  display: block;
+  width: min(340px, 58vw);
+  height: auto;
+}
+
 .bar {
-  position: fixed;
-  top: 0; left: 0; right: 0;
+  position: sticky;
+  top: 0;
   z-index: 50;
   display: grid;
   grid-template-columns: 1fr auto 1fr;
@@ -95,15 +122,6 @@ body.scrolled .bar {
 .bar__c { justify-self: center; }
 .bar__r { justify-self: end; display: flex; gap: 26px; }
 
-.mark {
-  display: inline-flex;
-  align-items: center;
-  min-height: 44px;
-  font-size: var(--fs);
-  letter-spacing: .06em;
-  white-space: nowrap;
-}
-
 .navlink {
   /* 44px hit area inside the 58px bar — the text does not move */
   display: inline-flex;
@@ -119,7 +137,15 @@ body.scrolled .bar {
 .navlink:hover { color: var(--ink); }
 .navlink[aria-current="page"] { color: var(--ink); }
 
-.page { padding-top: calc(var(--bar) + 4px); }
+.page { padding-top: 4px; }
+
+/* Her email and Instagram — the only links in running copy, so they carry
+   the same hairline underline the About page already used for "connect". */
+.mailto {
+  border-bottom: 1px solid var(--rule);
+  transition: border-color .35s var(--ease);
+}
+.mailto:hover { border-bottom-color: var(--ink); }
 
 /* ============================================================
    MENU (small screens)
@@ -255,35 +281,10 @@ body.menu-open { overflow: hidden; }
 
 .plate { margin: 0; }
 
-/* about: the photograph sits in the side column, with room beneath it
-   for the two reference images once they are cleared to publish */
+/* about: the photograph is the whole side column */
 .portrait { margin: 0; }
 .portrait img { width: 100%; height: auto; }
 .portrait figcaption { margin-top: 12px; font-style: italic; color: var(--mute); }
-
-.pair {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 14px;
-  margin-top: 14px;
-}
-.pair figure { margin: 0; }
-.pair img { width: 100%; height: auto; }
-.pair figcaption { margin-top: 10px; font-size: var(--fs-sm); color: var(--mute); line-height: 1.45; }
-
-/* the second reference is a text artifact rather than an image, so it
-   is given the same footprint as the plate beside it */
-.ref-quote {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-}
-.ref-quote blockquote {
-  margin: 0;
-  font-style: italic;
-  font-size: 1.05rem;
-  line-height: 1.35;
-}
 .plate figcaption { margin-top: 14px; font-style: italic; color: var(--mute); }
 
 .head { padding: 0 var(--pad); margin-bottom: clamp(30px, 6vh, 54px); }
@@ -338,7 +339,6 @@ body.menu-open { overflow: hidden; }
 }
 .submit:hover { opacity: .8; }
 
-.note { margin-top: 18px; max-width: 42ch; }
 
 /* ============================================================
    VIEWER

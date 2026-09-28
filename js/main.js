@@ -87,12 +87,15 @@
 
   /* ---------- bar ------------------------------------------ */
 
-  /* The bar is transparent over the top of the page so the deck and the
-     grid run under it, and only takes a background once you scroll. */
+  /* The bar is transparent until it sticks, so at rest the page opens on
+     the logo and the artwork alone. It sits below the logo rather than at
+     y=0, so the trigger is its own position, not a scroll distance. */
   function initBar() {
+    var bar = document.querySelector('.bar');
+    if (!bar) return;
     var on = false;
     function check() {
-      var past = window.scrollY > 8;
+      var past = bar.getBoundingClientRect().top <= 0;
       if (past === on) return;
       on = past;
       document.body.classList.toggle('scrolled', past);

@@ -25,6 +25,8 @@ js/main.js      menu, bar, grid, viewer
 images/full/    max 1800px — the viewer
 images/thumb/   max 900px — the grid
 images/icon-*   favicon, cropped from "Moon and Stars"
+images/wordmark.png    the logo — it IS the site title
+images/share-cover.jpg the og:image — her flower logo
 ```
 
 All artwork © Meighan Lindstrom.
@@ -41,10 +43,11 @@ and hairline once you scroll past 8px. The footer has no rule above it.
 
 ## The catalogue
 
-`js/works.js` is the single source of truth. **Array order is page order** —
-it is curated, not alphabetical or by series. Meighan's standing requests:
-the two martinis and *Everybody, Midtown* sit on row two, and the pink
-*I'll Be Your Flowers* opens the page.
+`js/works.js` is the single source of truth. **Array order is page order**,
+and the order is Meighan's own — she sent it as four screenshots of the
+page laid out row by row. The file keeps her rows grouped in threes to
+match the grid. Reordering across a row break changes her layout, so treat
+the blank lines as structural rather than cosmetic.
 
 To add a print:
 
@@ -81,22 +84,52 @@ An audit was run and its findings fixed. Worth preserving:
 - `prefers-reduced-motion` removes the viewer's travel but keeps its
   crossfade — it is not a blanket `transition: none`.
 
-## Still to supply
+## The header
 
-- **No email address or social links anywhere.** An earlier build carried an
-  invented `hello@…` address and an empty Instagram link; both were removed
-  rather than left as dead labels. Until real ones exist the contact form is
-  the only route — and note it is wired for Netlify, so it does nothing on
-  GitHub Pages.
+The logo replaced the text title — there is no "Meighan Lindstrom Art"
+wordmark in type any more, so the image carries the site name in its `alt`
+and the home link the text used to hold.
+
+It is a **PNG with a transparent ground**, cut out of the original scan by
+flood-filling the paper inward from the border. The scan's paper measured
+251 and dipped to 242, which read as a grey rectangle against the page's
+`#ffffff`. Re-exporting as JPEG, or cropping without clearing the ground,
+brings the box back.
+
+The logo sits in normal flow and scrolls away; the bar below it is
+`position: sticky`. Two things will break that if you touch them:
+
+- The bar must stay a **direct child of `body`**. A sticky element only
+  sticks within its parent's box, so wrapping the logo and the bar together
+  in one element makes the bar leave the screen with that wrapper.
+- `overflow-x: hidden` must stay on `html`, **not** `body`. On `body` it
+  computes `overflow-y` to `auto`, which makes `body` a scroll container and
+  silently kills the sticky.
+
+`initBar` keys the background off `bar.getBoundingClientRect().top <= 0`
+rather than a scroll distance, because the bar no longer starts at y=0.
+
+## Contact
+
+Her email and Instagram are on the About page, the Contact page and in the
+footer of every page.
+
+The form is wired for Netlify (`data-netlify="true"` plus the hidden
+`form-name` and the `bot-field` honeypot). **It does nothing on GitHub
+Pages** — anything typed into it is silently discarded, so until the move
+the email is the only working route. The decision is to move hosting to
+Netlify, at which point the form starts working with no code change.
+
+When that move happens, the absolute URLs need repointing: `og:url` and
+`og:image` on all three pages currently hard-code
+`https://landon358.github.io/meighanlindstromart/`. They have to be
+absolute for social scrapers, so they cannot just be made relative.
+
+## Notes
+
 - **Titles** come from each drawing's own hand lettering where it had any,
-  otherwise descriptive.
+  otherwise descriptive. *Everybody, Reaching* is descriptive and was named
+  here, not by Meighan.
 - **No dates.** No year, exhibition or client is claimed anywhere.
-
-## About page references
-
-The page carries a reproduction of Marc Chagall's *The Lovers of Vence*,
-credited in the caption as a reference and not her own work, at Meighan's
-explicit direction. The Assata Shakur reference is a short attributed
-quotation rather than the page scan. Both are third-party copyrighted works;
-if either ever draws an objection, removing them is a two-line change and the
-surrounding paragraph already credits all three influences by name.
+- The Chagall reproduction and the Shakur quotation were removed from the
+  About page at Meighan's request, along with `images/ref-chagall.jpg`.
